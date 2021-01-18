@@ -342,6 +342,7 @@ export interface SQL {
   functions: {
     LOWER<Name extends string>(c: Column<Name, string>): Column<Name, string>;
   };
+  array<T>(arr:T[]):BinaryNode
 }
 
 export interface Column<Name extends string, T> {
@@ -531,6 +532,18 @@ export interface Column<Name extends string, T> {
 
   contains(key: any): Column<any, any>;
   cast<T extends keyof CastMappings>(type: T): Column<Name, CastMappings[T]>;
+
+  /**
+ * Check if any of input key/element strings exist
+ * @param node 
+ */
+  existsKeyElement(node:BinaryNode):BinaryNode
+
+  /**
+ * Check if all of the input key/element strings exist
+ * @param node 
+ */
+  existsAllKeyElements(node:BinaryNode):BinaryNode
 }
 
 export interface BinaryNode {
